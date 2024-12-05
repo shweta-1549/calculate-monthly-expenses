@@ -34,8 +34,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public Registration updaterecord(Registration r) {
-		Optional<Registration> opt=regRepo.findById(r.getRegid());
+	public Registration updaterecord( int i,Registration r) {
+		Optional<Registration> opt=regRepo.findById(i);
 		if(opt.isPresent())
 		{
 			Registration rold=opt.get();
