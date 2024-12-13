@@ -40,4 +40,9 @@ public class RegistrationController {
 	{
 		return rs.updaterecord(i,r);
 	}
+	@GetMapping("/login/{emailid}/{password}")
+	public List<Registration> login(@PathVariable("emailid")String emailid,@PathVariable("password")String password)
+	{
+		return rs.login(emailid, password);
+	}
 }

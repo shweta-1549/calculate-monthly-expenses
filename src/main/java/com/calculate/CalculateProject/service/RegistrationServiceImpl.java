@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.calculate.CalculateProject.model.Feedback;
 import com.calculate.CalculateProject.model.Registration;
 import com.calculate.CalculateProject.repository.RegistractionRepository;
 
@@ -15,6 +16,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     @Qualifier("regRepo")
     private RegistractionRepository regRepo;
+
 	@Override
 	public Registration insertrecord(Registration r) {
 		// TODO Auto-generated method stub
@@ -29,13 +31,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public void del(int ri) {
-		// TODO Auto-generated method stub
 		regRepo.deleteById(ri);
+		
 	}
 
 	@Override
-	public Registration updaterecord( int i,Registration r) {
-		Optional<Registration> opt=regRepo.findById(i);
+	public Registration updaterecord(int i, Registration r) {
+		Optional<Registration> opt=regRepo.findById(r.getRegid());
 		if(opt.isPresent())
 		{
 			Registration rold=opt.get();
@@ -51,4 +53,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return null;
 	}
 
+	@Override
+	public List<Registration> login(String emailid, String password) {
+		// TODO Auto-generated method stub
+		return regRepo.findAllByEmailidAndPassword(emailid, password);
+	}
+    
+	
 }
